@@ -1,6 +1,7 @@
 import socketIo from 'socket.io';
-import { guardarFromForm, guardarNewMessage } from '../modules/guardar.js';
-import { productos, messages } from '../modules/data.js';
+import api from './api';
+
+const app = socketIo(8080);
 
 export const initWsServer = (server) => {
   const io = socketIo(server, {
