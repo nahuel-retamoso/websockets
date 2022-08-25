@@ -7,7 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    // handlebars enter product form
     <script id="enter-product-form-template" type="text/x-handlebars-template">
         <h1>Enter Product</h1>
         <form action="/productos" method="post">
@@ -22,5 +21,15 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
 
+    <h1>Chat</h1>
+    <form onsubmit="return addMessage(this)">
+        <input type="text" id="author" placeholder="Tu nombre">
+        <input type="text" id="text" placeholder="Cuéntanos algo....">
+        <input type="submit" value="Enviar">
+    </form>
+    <div id='messages'></div>
+
+<script src='/socket.io/socket.io.js'></script>
+<script src="chat.js"></script>
 </body>
 </html>
