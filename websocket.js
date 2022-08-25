@@ -14,8 +14,6 @@ export const initWsServer = (server) => {
   io.on('connection', (socket) => {
     console.log('Nueva Conexion establecida!');
 
-
-    //WebSocket que se encarga de avisar al front sobre nuevo productos agregados
     socket.on('new-product', (data) => {
       let res = guardarFromForm(data);
 
@@ -23,31 +21,31 @@ export const initWsServer = (server) => {
         socket.emit('messages', 'Datos no validos en el formulario');
       } else {
         let product = [productos[productos.length - 1]];
-        io.emit('update', productos); //Es el cargado desde el front pintar ese nuevo producto
+        io.emit('update', productos); 
       }
     });
 
-    //WebSocket que se encarga de contestar al front sobre todos los productos
+   
     socket.on('askProducts', () => {
       if (productos.length > 0) {
-        socket.emit('update', productos) //Es el cargado desde el front pintar ese nuevo producto
+        socket.emit('update', productos)
       }
     });
 
-    //Websocket que se encarga de avisar al front sobre nuevo messages del chat
+   
     socket.on('new-message', (data) => {
       guardarNewMessage(data);
       console.log(data)
       console.log("lista entera", messages)
       let message = [messages[messages.length - 1]];
-      io.emit('updateChat', messages); //Es el cargado desde el front pintar ese nuevo mensaje del chat
+      io.emit('updateChat', messages);
     });
 
-    //WebSocket que se encarga de contestar al front sobre todos los mensajes almacenado
+    
     socket.on('askMessages', () => {
       console.log('Envie los Messages');
       if (messages.length > 0) {
-        socket.emit('updateChat', messages); //Es el cargado desde el front pintar ese nuevo mensaje del chat
+        socket.emit('updateChat', messages);
       }
     });
   });
